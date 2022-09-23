@@ -1,0 +1,414 @@
+:root{
+  --fall: 900px;
+  --fall-timer: 700ms;
+  --bounce: 50px;
+}
+body {
+  margin: 0px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.show {
+  display: inherit;
+}
+
+.hide {
+  display: none;
+}
+
+button {
+  border: 1px transparent solid;
+  background-color: #1d91e3;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  transition: all 150ms;
+  cursor: pointer;
+  min-width: 50px;
+}
+
+button:hover {
+  background-color: #fff;
+  border: 1px solid #1d91e3;
+  color: #1d91e3;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Container */
+#container-content {
+  display: flex;
+  justify-content: space-around;
+  height: calc(100% - 55px);
+  overflow: auto;
+  max-width: 100%;
+}
+
+.home {
+  align-self: self-start;
+  margin-top: 20px;
+}
+
+.lobby,
+.game {
+  margin-top: 25px;
+}
+
+.game {
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.lobby>p {
+  text-align: center;
+}
+
+/* Menu */
+.menu {
+  text-align: center;
+  color: rgb(145, 145, 145);
+  background-color: rgb(49, 49, 49);
+  box-shadow: 0px -5px 20px #043c00;
+}
+
+.menu-link {
+  text-decoration: none;
+  font-family: arial;
+  font-size: 20px;
+  padding: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.menu-link:hover,
+.menu-link.selected {
+  background-color: white;
+}
+
+#title {
+  text-align: center;
+  border-bottom: 1px solid;
+  padding: 12px 0px;
+  height: 30px;
+  margin-bottom: 0px;
+}
+
+/* Chat and lobby */
+#chat {
+  display: flex;
+  justify-content: center;
+}
+
+#user-list {
+  width: 400px;
+}
+
+.user-element {
+  display: flex;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: #51b1f5;
+  color: white;
+}
+
+.user-element>div {
+  font-size: 1.5em;
+  align-self: center;
+}
+
+.user-image {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+
+#chat-box {
+  width: 500px;
+  border: 1px solid #cdcdcd;
+  border-radius: 5px;
+}
+
+#chat-content {
+  height: 400px;
+  border-bottom: 1px solid gray;
+  word-break: break-word;
+  overflow-y: auto;
+}
+
+.input-fields {
+  display: flex;
+}
+
+#chat-input,
+#private-chat-input {
+  line-height: 2;
+  border: 0px;
+  flex-grow: 1;
+}
+
+#chat-submit,
+#private-chat-submit {
+  border-radius: 0px;
+}
+
+#chat-room-list {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.room {
+  margin: 0px 10px;
+}
+
+.room>p {
+  margin-bottom: 5px;
+  text-align: center;
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+}
+
+.room-user {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 1.25em;
+  line-height: 50px;
+  padding: 0px 10px;
+}
+
+.room-user:first-child {
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.room-content {
+  display: flex;
+}
+
+.room-content>div {
+  height: 100px;
+  width: 300px;
+  border: 1px solid #bfbfbf;
+}
+
+.room-content>button {
+  font-size: 40px;
+}
+
+.room-button-leave {
+  background-color: #ef3939;
+}
+
+.room-button-game {
+  background-color: #38d738;
+  font-size: 20px !important;
+  width: 90px;
+}
+
+
+/* Drag n Drop */
+.Ablage {
+  color: #b3b3b3;
+}
+
+.Ablage>.Ablage-inner {
+  visibility: hidden;
+  box-shadow: 0px 0px 25px -15px black;
+  color: #b3b3b3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  margin: 10px;
+  user-select: none;
+}
+
+.Ablage>.Ablage-inner.AblageVisible {
+  visibility: visible;
+}
+
+.stein.dragging {
+  box-shadow: 0px 0px 30px -15px black;
+}
+
+#true,
+#false {
+  background-color: greenyellow;
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  margin: 0px 5em;
+}
+
+.dragover {
+  border-color: lightslategray;
+  border-style: solid;
+  border-width: 5px;
+}
+
+#Spielfeld {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin: 0 auto;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  height: 1100px;
+  width: 1100px;
+}
+
+.kreis {
+
+  background-color: lightblue;
+  aspect-ratio: 1/1;
+  display: flex;
+  place-content: center;
+  clip-path: url(#_test);
+  z-index: 1;
+}
+
+.stein-set {
+  display: none;
+}
+
+.kreis.stein1>.stein-set {
+  background-color: lightsalmon;
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+  align-self: center;
+  display: inherit;
+}
+
+.kreis.stein2>.stein-set {
+  background-color: lightseagreen;
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+  align-self: center;
+  display: inherit;
+}
+
+#false {
+  background-color: lightsalmon;
+  aspect-ratio: 1/1;
+}
+
+.stein1 {
+  clip-path: none;
+}
+
+#true {
+  background-color: lightseagreen;
+  aspect-ratio: 1/1;
+}
+
+.stein2 {
+  clip-path: none;
+}
+
+#turn {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.player {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+#Ergebnis {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50vw;
+  background-color: rgba(0, 0, 0, 0.75);
+  height: 50vh;
+  border-radius: 5%;
+  color: white;
+  font-size: 50px;
+  font-weight: bolder;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+  box-shadow: #000 0px 0px 20px -5px;
+  z-index: 10;
+}
+
+#Ergebnis button {
+  font-size: 2rem;
+  margin: 20px;
+}
+
+
+/* private chat in game */
+#private-chat-box {
+  width: 20vw;
+  bottom: 0px;
+  right: 0px;
+  min-width: 300px;
+  border: 1px solid #cdcdcd;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 0px 20px -10px black;
+  position: absolute;
+  height: 30vh;
+  z-index: 10;
+}
+
+#private-chat-content {
+  border-bottom: 1px solid gray;
+  word-break: break-word;
+  overflow-y: auto;
+  height: calc(100% - 41px);
+}
+
+.animation {
+  visibility: hidden;
+  z-index: -1;
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+
+
+  animation: fall var(--fall-timer);
+  animation-timing-function: linear;
+}
+
+@keyframes fall {
+  from {
+    transform: translate(0, 0);
+    visibility: visible;
+  }
+  50% {
+    transform: translate(0, var(--fall));
+  }
+  75% {
+    transform: translate(0, calc(var(--fall) - var(--bounce)));
+  }
+
+  to {
+    transform: translate(0, var(--fall));
+  }
+}
+
+.Ablage>.Ablage-inner.animation {
+  box-shadow: 0px 0px 0px 0px white;
+}
+
+.colorfalse {
+  background-color: #ffa07a;
+}
+
+.colortrue {
+  background-color: lightseagreen;
+}
