@@ -1,9 +1,9 @@
 export function init(router){
 
-    document.getElementById("to-lobby").addEventListener("click", (e) => {
+    document.getElementById("to-home").addEventListener("click", (e) => {
 
         // change route
-        router.changeRoute("/lobby");
+        router.changeRoute("/home");
     });
 }
 
@@ -12,9 +12,9 @@ export const template = `
     <h2>Willkommen, Spieler!</h2>
     <div style="text-align: center;">
     <p>
-        Hier hast du die Möglichkeit, gegen andere Spieler das Spiel <b>Vier gewinnt</b> zu spielen. Klicke auf den Button und du gelangst zur Lobby, um Spieler zu finden, mit denen du zusammen spielen kannst.
+        Default
     </p>
-    <button id="to-lobby" class="menu-link" link="/lobby">Zur Lobby</button>
+    <button id="to-home" class="menu-link" link="/home">Das ist ein Button</button>
     </div>
     </div>
 `;
