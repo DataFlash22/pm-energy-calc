@@ -4,10 +4,10 @@ var data = {
 
 export function init(router){
 
-    document.getElementById("to-lobby").addEventListener("click", (e) => {
+    document.getElementById("to-home").addEventListener("click", (e) => {
 
         // change route
-        router.changeRoute("/lobby");
+        router.changeRoute("/");
     });
 
     document.getElementById("calculate").addEventListener("click", (e) => {
