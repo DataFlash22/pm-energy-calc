@@ -1,14 +1,14 @@
 let data = {
     year : [2022, 2023],
-    //yearKwh : [0.28, 0.30, 0.60],
 
+    // only kWh values
     cost2021 : {
         electricity: 0.28,
-        gas: 0.50,  // Temp, for test 
-        oil: 0.43,  // Temp, for test
-        districtHeating: 0,
-        heatPump: 0,
-        woodPellets: 0,
+        gas: 0.0641,
+        oil: 0.07,
+        districtHeating: 0.094,
+        heatPump: 0.258,
+        woodPellets: 0.046,
     },
 
     cost : {
@@ -17,22 +17,23 @@ let data = {
         2023 : {},
     },
 
+    // only % values
     costIncrease : {
         2022 : {
             electricity: 10,
-            gas: 106,
-            oil: 120,
+            gas: 108,
+            oil: 100,
             districtHeating: 20,
-            heatPump: 66,
-            woodPellets: 100
+            heatPump: 16,
+            woodPellets: 65
         },
         2023 : {
-            electricity: 100,
-            gas: 80, // Temp, for test
-            oil: 70, // Temp, for test
-            districtHeating: 0,
-            heatPump: 0,
-            woodPellets: 0,
+            electricity: 35,
+            gas: -17,
+            oil: 20,
+            districtHeating: 166,
+            heatPump: 26,
+            woodPellets: 15,
         }
     }
 };
