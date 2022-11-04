@@ -4,8 +4,8 @@ let data = {
 
     cost2021 : {
         electricity: 0.28,
-        gas: 0.50,
-        oil: 0.43,
+        gas: 0.50,  // Temp, for test 
+        oil: 0.43,  // Temp, for test
         districtHeating: 0,
         heatPump: 0,
         woodPellets: 0,
@@ -18,14 +18,6 @@ let data = {
     },
 
     costIncrease : {
-        /* 2021 : {
-            electricity: 0,
-            gas: 0,
-            oil: 0,
-            districtHeating: 0,
-            heatPump: 0,
-            woodPellets: 0,
-        }, */
         2022 : {
             electricity: 10,
             gas: 106,
@@ -45,18 +37,18 @@ let data = {
     }
 };
 
-// User Input for kwH electricity
+// to save fixed2023 costs for slider
+let fixed2023Cost = {};
+
+// User Input for kwH electricity TEMP
 let consumption, consumptionHeater;
 // TEMP; should be come from User
 consumption = consumptionHeater = 4500;
 
-let consumptionSliderResult;
-let consumptionSliderResultHeater;
-
-let fixed2023ElectricityCost = null;
-let fixed2023HeaterCost = null;
-
+// value is set by prepareCostCalculation()
 let dropdownSelect;
+
+
 
 export function init(router){
 
@@ -67,19 +59,19 @@ export function init(router){
     }); */
 
     document.getElementById("calculateElectricity").addEventListener("click", (e) => {
-        calculateElectricity();
+        prepareCostCalculation("electricity");
     });
 
     document.getElementById("calculateHeater").addEventListener("click", (e) => {
-        calculateHeater();
+        prepareCostCalculation("heater");
     });
 
     document.getElementById("range-slider-electricity").addEventListener("input", (e) => {
-        slider(e);
+        prepareSlider(e, "electricity");
     });
 
     document.getElementById("range-slider-heater").addEventListener("input", (e) => {
-        sliderHeater(e);
+        prepareSlider(e, "heater");
     });
 }
 
@@ -118,25 +110,42 @@ export const template = `
     </div>
 `;
 
-// will trigger by button "Berechnen"
-function calculateElectricity(){
 
-    // 1. get input
-    // verbrauch
-    // TEMP
-    // consumption = document.get...value
+function prepareCostCalculation(type){
 
-    // calculate cost of 2021
-    let calcCost2021 = parseInt((data.cost2021.electricity * consumption).toFixed(0));
-    data.cost[2021].electricity = calcCost2021;
+    // TODO
+    // get input value (something linke document.getElementById('input-'+type))
+    // set value in global value
+
+    let costType;
+
+    switch (type) {
+        case "heater":
+            costType = document.getElementById("heater-select").value;
+            dropdownSelect = costType;
+            break;
+        case "electricity":
+            costType = "electricity";
+        default:
+            break;
+    }
+
+    // eg costType = "gas", type = "heater"
+    calculateYearCosts(costType, type);
+}
+
+function calculateYearCosts(type, resultType){
+
+    let calcCost2021 = parseInt((data.cost2021[type] * consumption).toFixed(0));
+    data.cost[2021][type] = calcCost2021;
 
     for(let [key, value] of Object.entries(data.costIncrease)){
 
         // will get electricity value increase of current year and add it with costs of year before
-        let cost = (value.electricity / 100 * data.cost[(key-1)].electricity) + data.cost[(key-1)].electricity;
+        let cost = (value[type] / 100 * data.cost[(key-1)][type]) + data.cost[(key-1)][type];
 
         // round result
-        data.cost[key].electricity = parseInt(cost.toFixed(0));
+        data.cost[key][type] = parseInt(cost.toFixed(0));
         }
 
     let newElements = [];
@@ -146,137 +155,61 @@ function calculateElectricity(){
     for (let [key, value] of Object.entries(data.cost)){
 
         let newElement = document.createElement('p');
-        newElement.textContent = `${value.electricity}€`;
+        newElement.textContent = `${value[type]}€`;
 
         newElements.push(newElement);
     }
 
-    document.getElementById('calc-result-electricity').replaceChildren(...newElements);
+    document.getElementById('calc-result-'+resultType).replaceChildren(...newElements);
 }
 
-// trigger by slider action
-// this function will get the value of the slider and will calculate the consumption from the consumption the user entered
-function slider(e){
+function prepareSlider(e, type){
 
     let value = e.target.valueAsNumber;
 
-    // will calculate the consumption after slider touched
-    // eg. 0% -> 4000 then 100% -> 0, -100% -> 8000
-    consumptionSliderResult = (consumption - ((value / 100) * consumption)).toFixed(0);
+    let costType;
 
-    calculateLastSlider(value);
+    switch (type) {
+        case "heater":
 
-    sliderValue(value);
+            // abort here if dropdown was not set from prepareCostCalculation before
+            if(!dropdownSelect) return;
+
+            costType = dropdownSelect;
+            break;
+        case "electricity":
+            costType = "electricity";
+        default:
+            break;
+    }
+
+    calculate2023Slider(value, costType, type);
+
+    sliderValue(value, type);
 }
 
-// this function will calculate the last costs
-// trigger by slider()
-function calculateLastSlider(value){
+function calculate2023Slider(value, type, resultType){
 
     // set initial value, only for first time
-    if(!fixed2023ElectricityCost) fixed2023ElectricityCost = data.cost[2023].electricity;
+    if(typeof fixed2023Cost[type] == "undefined") fixed2023Cost[type] = data.cost[2023][type];
 
     // calculating the new 2023 value
-    let calculation = fixed2023ElectricityCost - (fixed2023ElectricityCost * (value / 100));
+    let calculation = fixed2023Cost[type] - (fixed2023Cost[type] * (value / 100));
     calculation = parseInt(calculation.toFixed(0));
-    data.cost[2023].electricity = calculation;
+    data.cost[2023][type] = calculation;
 
-    let lastChild = document.getElementById('calc-result-electricity').lastChild;
+    // take last child (should be the value of 2023)
+    let lastChild = document.getElementById('calc-result-'+resultType).lastChild;
 
+    // replace textContent with new calculation
     lastChild.textContent = `${calculation}€`;
 }
 
 // trigger by slider()
 // this function will handle the "XX% Einsparung" or "xx% höherer Verbrauch"
-function sliderValue(value){
+function sliderValue(value, resultType){
 
-    let element = document.getElementById("range-slider-electricity-value");
-
-    let negative = value < 0;
-
-    // always get absolut number
-    value = Math.abs(value);
-
-    element.textContent = value + "%" + (negative ? " höherer Verbrauch" : " Einsparung");
-
-    element.classList.remove("text-bg-success", "text-bg-danger");
-
-    if(!negative) element.classList.add("text-bg-success");
-    else element.classList.add("text-bg-danger");
-}
-
-function calculateHeater(){
-
-    // 1. get input
-    // verbrauch & dropdown
-    // TEMP
-
-    dropdownSelect = document.getElementById("heater-select").value;
-
-    let calcCost2021 = parseInt((data.cost2021[dropdownSelect] * consumption).toFixed(0));
-    data.cost[2021][dropdownSelect] = calcCost2021;
-
-    for(let [key, value] of Object.entries(data.costIncrease)){
-
-        // will get electricity value increase of current year and add it with costs of year before
-        let cost = (value[dropdownSelect] / 100 * data.cost[(key-1)][dropdownSelect]) + data.cost[(key-1)][dropdownSelect];
-
-        // round result
-        data.cost[key][dropdownSelect] = parseInt(cost.toFixed(0));
-        }
-
-    let newElements = [];
-
-    // 3. set output
-    // create 3 elements for 3 years
-    for (let [key, value] of Object.entries(data.cost)){
-
-        let newElement = document.createElement('p');
-        newElement.textContent = `${value[dropdownSelect]}€`;
-
-        newElements.push(newElement);
-    }
-
-    document.getElementById('calc-result-heater').replaceChildren(...newElements);
-}
-
-// trigger by slider action
-// this function will get the value of the slider and will calculate the consumption from the consumption the user entered
-function sliderHeater(e){
-
-    let value = e.target.valueAsNumber;
-
-    // will calculate the consumption after slider touched
-    // eg. 0% -> 4000 then 100% -> 0, -100% -> 8000
-    consumptionSliderResultHeater = (consumptionHeater - ((value / 100) * consumptionHeater)).toFixed(0);
-
-    calculateLastSliderHeater(value);
-
-    sliderValueHeater(value);
-}
-
-// this function will calculate the last costs
-// trigger by slider()
-function calculateLastSliderHeater(value){
-
-    // set initial value, only for first time
-    if(!fixed2023HeaterCost) fixed2023HeaterCost = data.cost[2023][dropdownSelect];
-
-    // calculating the new 2023 value
-    let calculation = fixed2023HeaterCost - (fixed2023HeaterCost * (value / 100));
-    calculation = parseInt(calculation.toFixed(0));
-    data.cost[2023][dropdownSelect] = calculation;
-
-    let lastChild = document.getElementById('calc-result-heater').lastChild;
-
-    lastChild.textContent = `${calculation}€`;
-}
-
-// trigger by slider()
-// this function will handle the "XX% Einsparung" or "xx% höherer Verbrauch"
-function sliderValueHeater(value){
-
-    let element = document.getElementById("range-slider-heater-value");
+    let element = document.getElementById("range-slider-"+resultType+"-value");
 
     let negative = value < 0;
 
