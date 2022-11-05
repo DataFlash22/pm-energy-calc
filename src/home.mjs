@@ -92,7 +92,7 @@ export function init(router) {
 }
 
 export const template = `
-<div class="home">
+<div class="home w3-flat-turquoise" style="padding:1rem">
     <h2 class="text-center">Willkommen auf ERB!</h2>
     <hr>
 
