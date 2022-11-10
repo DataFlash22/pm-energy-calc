@@ -47,3 +47,7 @@
 {color:#000!important;background-color:#bdc3c7!important}
 .w3-flat-asbestos
 {color:#fff!important;background-color:#7f8c8d!important}
+
+.nav-link {
+  cursor: pointer;
+}
