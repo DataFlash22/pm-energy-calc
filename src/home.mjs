@@ -43,40 +43,83 @@ let data = {
 // to save fixed2023 costs for slider
 let fixed2023Cost = {};
 
-// User Input for kwH electricity TEMP
-let consumption, consumptionHeater;
-// TEMP; should be come from User
-consumption = consumptionHeater = 4500;
+// User Input for kwH (both electricity and heater)
+let consumption;
+
+// default value
+consumption = 4500;
 
 // value is set by prepareCostCalculation()
 let dropdownSelect;
 
-export function init(router) {
-  /* document.getElementById("to-home").addEventListener("click", (e) => {
+export const template = `
+<div class="" style="padding:1rem">
+    <h2 class="text-center">Willkommen auf ERB!</h2>
+    <hr>
 
-        // change route
-        router.changeRoute("/");
-    }); */
+    <div class="container mb-3">
+        <div class="border border-dark rounded-2" style="height: 300px;">
+          <h2>Stromquelle</h2>
+            <button id="calculateElectricity" class="btn btn-warning">Stromkosten berechnen</button>
+            <label for="user-input-electricity">Vorjahresverbrauch (in kw/h):</label>
+            <input type="number" id="user-input-electricity" value="4500">
+            <input style="display:none" type="range" class="form-range" min="-100" max="100" id="range-slider-electricity">
+            <p class="text-center" id="range-slider-electricity-value"></p>
+            <div id="calc-result-electricity"></div>
+          </div>
+        </div>
+    
+    <br/>
+    <h2> Andere Energiequellen </h2>
+    <select class="form-select" aria-label="Heizung Dropdown" id="heater-select">
+        <option id="selectEnergyValue" value="selectEnergyValue" selected default>Wähle einen Energieträger</option> 
+        <option value="gas">Gas</option>
+        <option value="oil">Öl</option>
+        <option value="districtHeating">Fernwärme</option>
+        <option value="heatPump">Wärmepumpe</option>
+        <option value="woodPellets">Holzpellets</option>
+      </select>
+    </br>
+    <button id="calculateHeater" class="btn btn-danger disabled">Heizkosten berechnen</button>
+    <label for="user-input-heater">Vorjahresverbrauch (in kw/h):</label>
+    <input type="number" id="user-input-heater" value="4500">
+    <input style="display:none" type="range" class="form-range" min="-100" max="100" id="range-slider-heater">
+    <p class="text-center" id="range-slider-heater-value"></p>
+
+    <div id="calc-result-heater"></div>
+
+    </div>
+`;
+
+export function init(router) {
+
+  // Button Click "Stromkosten berechnen"
   document
     .getElementById("calculateElectricity")
     .addEventListener("click", (e) => {
       prepareCostCalculation("electricity");
-      showSliderElectricity("show");
+      showSlider("electricity");
     });
 
+  // Input Enter "Stromkosten berechnen"
+  document.getElementById('user-input-electricity').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      prepareCostCalculation("electricity");
+      showSlider("electricity");
+    }
+  });
+
+  // Button Click "Heizkosten berechnen"
   document.getElementById("calculateHeater").addEventListener("click", (e) => {
-    let selectEnergy = document.getElementById("heater-select").value;
-    let showError = document.getElementById("errorHandling").style;
-    if (selectEnergy === "selectEnergyValue") {
-      if ((showError.cssText = "none")) {
-        showError.cssText = "block";
-        showError.padding = "0.5rem";
-      } else {
-        showError.cssText = "none";
-      }
-    } else {
+    prepareCostCalculation("heater");
+    showSlider("heater");
+  });
+
+  // Input Enter "Heizkosten berechnen"
+  document.getElementById('user-input-heater').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
       prepareCostCalculation("heater");
-      showSliderHeater("showSlider", "showError");
+      showSlider("heater");
     }
   });
 
@@ -91,72 +134,35 @@ export function init(router) {
     .addEventListener("input", (e) => {
       prepareSlider(e, "heater");
     });
+
+  document
+    .getElementById("heater-select")
+    .addEventListener("change", (e) => {
+      
+      // remove disabled class from button "Heizkosten berechnen"
+      document.getElementById("calculateHeater").classList.remove("disabled");
+    });
 }
 
-export const template = `
-<div class="home w3-flat-turquoise" style="padding:1rem">
-    <h2 class="text-center">Willkommen auf ERB!</h2>
-    <hr>
 
-    <div class="container mb-3">
-        <div class="border border-dark rounded-2" style="height: 300px;"></div>
-        </div>
-    
-        <h2>Stromquelle</h2>
-    <button id="calculateElectricity" class="btn btn-warning">Stromkosten berechnen</button>
-        <label for="user-input-electricity">Vorjahresverbrauch (in kw/h):</label>
-        <input type="number" id="user-input-electricity" value="4500">
-        <input style="display:none" type="range" class="form-range" min="-100" max="100" id="range-slider-electricity">
-        <p class="text-center" id="range-slider-electricity-value"></p>
-    <div id="calc-result-electricity"></div>
-    <br/>
-    <h2> Andere Energiequellen </h2>
-    <select class="form-select" aria-label="Heizung Dropdown" id="heater-select">
-        <option id="selectEnergyValue" value="selectEnergyValue" selected>Such eine Heizquelle aus</option> 
-        <option value="gas">Gas</option>
-        <option value="oil">Öl</option>
-        <option value="districtHeating">Fernwärme</option>
-        <option value="heatPump">Wärmepumpe</option>
-        <option value="woodPellets">Holzpellets</option>
-      </select>
-    </br>
-    <button id="calculateHeater" class="btn btn-danger">Heizkosten berechnen</button>
-    <label for="user-input-heater">Vorjahresverbrauch (in kw/h):</label>
-    <input type="number" id="user-input-heater" value="4500">
-    <input style="display:none" type="range" class="form-range" min="-100" max="100" id="range-slider-heater">
-    <p class="text-center" id="range-slider-heater-value"></p>
-    <h4 class="text-center w3-flat-pomegranate" style="display:none;" id="errorHandling">Bitte wähl eine Energiequelle aus.</h4>
+function showSlider(type){
 
-    <div id="calc-result-heater"></div>
+  // get slider style
+  let sliderStyle = document.getElementById("range-slider-" + type).style;
 
-    </div>
-`;
-
-// This function show the Slider under the button if it pressed.
-function showSliderElectricity(showSlider) {
-  showSlider = document.getElementById("range-slider-electricity").style;
-  if ((showSlider.cssText = "none")) {
-    showSlider.cssText = "block";
+  if(sliderStyle.cssText == "none") {
+    sliderStyle.cssText = "block";
   } else {
-    showSlider.cssText = "none";
+    sliderStyle.cssText = "none";
   }
+
 }
 
-function showSliderHeater(showSlider, showError) {
-  showSlider = document.getElementById("range-slider-heater").style;
-  document.getElementById("errorHandling").style.display = "none";
-  console.log(showError);
-  if ((showSlider.cssText = "none")) {
-    showSlider.cssText = "block";
-  } else {
-    showSlider.cssText = "none";
-  }
-}
 
+
+
+// triggered by buttons "... berechnen"
 function prepareCostCalculation(type) {
-  // TODO
-  // get input value (something linke document.getElementById('input-'+type))
-  // set value in global value
 
   let costType;
 
@@ -165,19 +171,33 @@ function prepareCostCalculation(type) {
       consumption = document.getElementById("user-input-heater").value;
       costType = document.getElementById("heater-select").value;
       dropdownSelect = costType;
+
+      // reset slider to 0
+      document.getElementById("range-slider-heater").value = 0;
+      sliderValue(0, "heater");
+
       break;
     case "electricity":
       consumption = document.getElementById("user-input-electricity").value;
       costType = "electricity";
+
+      // reset slider to 0
+      document.getElementById("range-slider-electricity").value = 0;
+      sliderValue(0, "electricity");
     default:
       break;
   }
+
+  // reset fixed 2023 for slider
+  delete fixed2023Cost[costType];
 
   // eg costType = "gas", type = "heater"
   calculateYearCosts(costType, type);
 }
 
 function calculateYearCosts(type, resultType) {
+
+  // calculate 2021
   let calcCost2021 = parseInt((data.cost2021[type] * consumption).toFixed(0));
   data.cost[2021][type] = calcCost2021;
 
@@ -239,6 +259,7 @@ function prepareSlider(e, type) {
 }
 
 function calculate2023Slider(value, type, resultType) {
+
   // set initial value, only for first time
   if (typeof fixed2023Cost[type] == "undefined")
     fixed2023Cost[type] = data.cost[2023][type];
