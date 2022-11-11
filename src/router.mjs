@@ -9,7 +9,7 @@ export class Router {
         this.routes.set(404, {template: "<h2>404 - not found</h2>", callback: null, callbackParam: []});
 
         // for every menu-link in menu, add EventListener for Click and change Route
-        for(const element of document.getElementsByClassName("menu-link")){
+        for(const element of document.getElementsByClassName("nav-link")){
             element.addEventListener("click", (e) => {
                 e.preventDefault();
                 this.changeRoute(e.target.getAttribute("link"));
@@ -35,37 +35,58 @@ export class Router {
 
         // create new element template
         const newElement = document.createElement("template");
-
+        console.log(obj)
         // if obj is an object and the template key is presented
         if(typeof obj === "object" && "template" in obj){
 
-            // set template in HTML of newElement
-            newElement.innerHTML = obj.template.trim();
+            if(obj.template.endsWith(".html")) {
 
-            // set childrens of newElement in container element
-            this.containerElement.replaceChildren(...newElement.content.childNodes);
+                var text = "";
 
-            // if route has a callback function, run it
-            if(typeof obj.callback === "function") obj.callback(...obj.callbackParam);
+                async function loadHtml() {
+                    const response = await fetch("../templates/"+obj.template);
+                    console.log(response);
+                    text = await response.text()
+               }
+
+                loadHtml();
+
+                // set template in HTML of newElement
+                newElement.innerHTML = text;
+
+                // set childrens of newElement in container element
+                this.containerElement.replaceChildren(...newElement.content.childNodes);
+
+                // if route has a callback function, run it
+                if(typeof obj.callback === "function") obj.callback(...obj.callbackParam);
+            }
+
+            else {
+
+                // set template in HTML of newElement
+                newElement.innerHTML = obj.template.trim();
+
+                // set childrens of newElement in container element
+                this.containerElement.replaceChildren(...newElement.content.childNodes);
+
+                // if route has a callback function, run it
+                if(typeof obj.callback === "function") obj.callback(...obj.callbackParam);
+            }
         }
-
-        /* 
-        * Can be activated again if a menu exists
-        */
        
         // show selected in menu
-        /* const menuElementList = document.getElementsByClassName("menu-link");
+        const menuElementList = document.getElementsByClassName("nav-link");
         const menuElementSelected = document.querySelectorAll(`[link="${path}"]`);
 
         // remove selected class from all menu-links
         for(const element of menuElementList){
-            element.classList.remove("selected");
+            element.classList.remove("active");
         }
     
         // add selected class only for wanted element
         for(const element of menuElementSelected){
-            element.classList.add("selected");
-        } */
+            element.classList.add("active");
+        }
     }
 
     // change route if menu-link was clicked or popstate event was triggered

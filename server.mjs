@@ -1,6 +1,5 @@
 import * as esbuild from "esbuild"
 import * as http from "http"
-import "./websocket_server.mjs"
 
 function tranformPath(path) {
   const isNotHTML = ['.css', '.js', '.mjs', '.mp3', '.ico'].some((extension) => path.endsWith(extension));
