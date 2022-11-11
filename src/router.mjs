@@ -35,7 +35,7 @@ export class Router {
 
         // create new element template
         const newElement = document.createElement("template");
-        console.log(obj)
+
         // if obj is an object and the template key is presented
         if(typeof obj === "object" && "template" in obj){
 
@@ -44,21 +44,21 @@ export class Router {
                 var text = "";
 
                 async function loadHtml() {
-                    const response = await fetch("../templates/"+obj.template);
-                    console.log(response);
+                    const response = await fetch(obj.template);
                     text = await response.text()
                }
 
-                loadHtml();
+                loadHtml().then(() => {
 
-                // set template in HTML of newElement
-                newElement.innerHTML = text;
+                    // set template in HTML of newElement
+                    newElement.innerHTML = text;
 
-                // set childrens of newElement in container element
-                this.containerElement.replaceChildren(...newElement.content.childNodes);
+                    // set childrens of newElement in container element
+                    this.containerElement.replaceChildren(...newElement.content.childNodes);
 
-                // if route has a callback function, run it
-                if(typeof obj.callback === "function") obj.callback(...obj.callbackParam);
+                    // if route has a callback function, run it
+                    if(typeof obj.callback === "function") obj.callback(...obj.callbackParam);
+                });
             }
 
             else {
