@@ -2,7 +2,7 @@ import * as esbuild from "esbuild"
 import * as http from "http"
 
 function tranformPath(path) {
-  const isNotHTML = ['.css', '.js', '.mjs', '.mp3', '.ico'].some((extension) => path.endsWith(extension));
+  const isNotHTML = ['.css', '.js', '.mjs', '.mp3', '.ico', '.svg', '.html'].some((extension) => path.endsWith(extension));
   const isTemplate = path.startsWith("/templates")
   if(isNotHTML || isTemplate) return path;
   return "/"
