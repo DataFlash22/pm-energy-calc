@@ -102,6 +102,8 @@ export const template = `
     
         <h2>Stromquelle</h2>
     <button id="calculateElectricity" class="btn btn-warning">Stromkosten berechnen</button>
+        <label for="user-input-electricity">Vorjahresverbrauch (in kw/h):</label>
+        <input type="number" id="user-input-electricity" value="4500">
         <input style="display:none" type="range" class="form-range" min="-100" max="100" id="range-slider-electricity">
         <p class="text-center" id="range-slider-electricity-value"></p>
     <div id="calc-result-electricity"></div>
@@ -117,7 +119,8 @@ export const template = `
       </select>
     </br>
     <button id="calculateHeater" class="btn btn-danger">Heizkosten berechnen</button>
-
+    <label for="user-input-heater">Vorjahresverbrauch (in kw/h):</label>
+    <input type="number" id="user-input-heater" value="4500">
     <input style="display:none" type="range" class="form-range" min="-100" max="100" id="range-slider-heater">
     <p class="text-center" id="range-slider-heater-value"></p>
     <h4 class="text-center w3-flat-pomegranate" style="display:none;" id="errorHandling">Bitte wähl eine Energiequelle aus.</h4>
@@ -156,10 +159,12 @@ function prepareCostCalculation(type) {
 
   switch (type) {
     case "heater":
+      consumption = document.getElementById("user-input-heater").value;
       costType = document.getElementById("heater-select").value;
       dropdownSelect = costType;
       break;
     case "electricity":
+      consumption = document.getElementById("user-input-electricity").value;
       costType = "electricity";
     default:
       break;
