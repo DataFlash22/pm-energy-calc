@@ -1,3 +1,5 @@
+import { differenceEuro, differencePercent } from "./calculations.mjs";
+
 let data = {
   year: [2022, 2023],
 
@@ -187,6 +189,21 @@ function calculateYearCosts(type, resultType) {
     data.cost[key][type] = parseInt(cost.toFixed(0));
   }
 
+  // calculation of the difference between the years
+  // Difference from 2021 to 2022
+  let difEuro2122 = differenceEuro(data.cost[2021][type], data.cost[2022][type]);
+  let difPerc2122 = differencePercent(difEuro2122, data.cost[2021][type]);
+
+  // Difference from 2022 to 2023
+  let difEuro2223 = differenceEuro(data.cost[2022][type], data.cost[2023][type]);
+  let difPerc2223 = differencePercent(difEuro2223, data.cost[2021][type]);
+
+  // TODO: Add difference into HTML
+
+  // 3. set output
+  // create 3 elements for 3 years
+  for (let [key, value] of Object.entries(data.cost)){
+
   let newElements = [];
 
   // 3. set output
@@ -235,10 +252,14 @@ function calculate2023Slider(value, type, resultType) {
   calculation = parseInt(calculation.toFixed(0));
   data.cost[2023][type] = calculation;
 
+  // calculating the new difference
+  let difEuro2223 = differenceEuro(data.cost[2022][type], data.cost[2023][type]);
+  let difPerc2223 = differencePercent(difEuro2223, data.cost[2021][type]);
+
+  // TODO: Add difference into HTML
+
   // take last child (should be the value of 2023)
-  let lastChild = document.getElementById(
-    "calc-result-" + resultType
-  ).lastChild;
+  let lastChild = document.getElementById('calc-result-'+resultType).lastChild;
 
   // replace textContent with new calculation
   lastChild.textContent = `${calculation}€`;
