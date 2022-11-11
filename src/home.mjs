@@ -141,6 +141,7 @@ function showSliderElectricity(showSlider) {
     showSlider.cssText = "none";
   }
 }
+
 function showSliderHeater(showSlider, showError) {
   showSlider = document.getElementById("range-slider-heater").style;
   document.getElementById("errorHandling").style.display = "none";
@@ -199,11 +200,6 @@ function calculateYearCosts(type, resultType) {
   let difPerc2223 = differencePercent(difEuro2223, data.cost[2021][type]);
 
   // TODO: Add difference into HTML
-
-  // 3. set output
-  // create 3 elements for 3 years
-  for (let [key, value] of Object.entries(data.cost)){
-
   let newElements = [];
 
   // 3. set output
