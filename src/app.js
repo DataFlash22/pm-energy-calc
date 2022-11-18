@@ -5,7 +5,7 @@ import "./app.css"
 
 const router = new Router();
 
-router.registerRoute("/", {template: home.template, callback: home.init, callbackParam: [router]});
+router.registerRoute("/", {template: "home.html", callback: home.init, callbackParam: [router]});
 router.registerRoute("/imprint", {template: "impressum.html", callback: null, callbackParam: []});
 
 // take current pathname

@@ -88,8 +88,16 @@
   background-color: #7f8c8d !important;
 }
 
+body, .table, .btn, .form-select {
+  font-size: 1.2rem !important;
+}
+
 .nav-link {
   cursor: pointer;
+}
+
+.nav-link:focus, .nav-link:hover {
+  color: white !important;
 }
 
 .nav-link.active {
@@ -98,4 +106,20 @@
 
 option[default] {
   display: none;
+}
+
+.arrow {
+  font-size: 2em;
+  padding-top: 4px;
+}
+
+.disclaimer {
+  font-style: italic;
+  font-size: 80%;
+}
+
+@media (max-width: 992px){
+  #nav-fix {
+    display: none;
+  }
 }

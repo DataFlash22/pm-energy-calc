@@ -52,45 +52,6 @@ consumption = 4500;
 // value is set by prepareCostCalculation()
 let dropdownSelect;
 
-export const template = `
-<div class="" style="padding:1rem">
-    <h2 class="text-center">Willkommen auf ERB!</h2>
-    <hr>
-
-    <div class="container mb-3">
-        <div class="border border-dark rounded-2" style="height: 300px;">
-          <h2>Stromquelle</h2>
-            <button id="calculateElectricity" class="btn btn-warning">Stromkosten berechnen</button>
-            <label for="user-input-electricity">Vorjahresverbrauch (in kw/h):</label>
-            <input type="number" id="user-input-electricity" value="4500">
-            <input style="display:none" type="range" class="form-range" min="-100" max="100" id="range-slider-electricity">
-            <p class="text-center" id="range-slider-electricity-value"></p>
-            <div id="calc-result-electricity"></div>
-          </div>
-        </div>
-    
-    <br/>
-    <h2> Andere Energiequellen </h2>
-    <select class="form-select" aria-label="Heizung Dropdown" id="heater-select">
-        <option id="selectEnergyValue" value="selectEnergyValue" selected default>Wähle einen Energieträger</option> 
-        <option value="gas">Gas</option>
-        <option value="oil">Öl</option>
-        <option value="districtHeating">Fernwärme</option>
-        <option value="heatPump">Wärmepumpe</option>
-        <option value="woodPellets">Holzpellets</option>
-      </select>
-    </br>
-    <button id="calculateHeater" class="btn btn-danger disabled">Heizkosten berechnen</button>
-    <label for="user-input-heater">Vorjahresverbrauch (in kw/h):</label>
-    <input type="number" id="user-input-heater" value="4500">
-    <input style="display:none" type="range" class="form-range" min="-100" max="100" id="range-slider-heater">
-    <p class="text-center" id="range-slider-heater-value"></p>
-
-    <div id="calc-result-heater"></div>
-
-    </div>
-`;
-
 export function init(router) {
 
   // Button Click "Stromkosten berechnen"
@@ -138,12 +99,9 @@ export function init(router) {
   document
     .getElementById("heater-select")
     .addEventListener("change", (e) => {
-      
-      // remove disabled class from button "Heizkosten berechnen"
-      document.getElementById("calculateHeater").classList.remove("disabled");
-    });
+      document.getElementById("calculateHeater").removeAttribute("disabled");
+    })
 }
-
 
 function showSlider(type){
 
@@ -157,8 +115,6 @@ function showSlider(type){
   }
 
 }
-
-
 
 
 // triggered by buttons "... berechnen"
@@ -210,31 +166,65 @@ function calculateYearCosts(type, resultType) {
     data.cost[key][type] = parseInt(cost.toFixed(0));
   }
 
-  // calculation of the difference between the years
-  // Difference from 2021 to 2022
-  let difEuro2122 = differenceEuro(data.cost[2021][type], data.cost[2022][type]);
-  let difPerc2122 = differencePercent(difEuro2122, data.cost[2021][type]);
-
-  // Difference from 2022 to 2023
-  let difEuro2223 = differenceEuro(data.cost[2022][type], data.cost[2023][type]);
-  let difPerc2223 = differencePercent(difEuro2223, data.cost[2021][type]);
-
-  // TODO: Add difference into HTML
-  let newElements = [];
-
-  // 3. set output
-  // create 3 elements for 3 years
+  // show values (for years) in table
   for (let [key, value] of Object.entries(data.cost)) {
-    let newElement = document.createElement("p");
-    newElement.textContent = `${value[type]}€`;
 
-    newElements.push(newElement);
+    // take element in table
+    let elementTable = document.getElementById('calc-result-' + resultType + '-' + key);
+
+    // set value
+    elementTable.textContent = `${value[type]}€`;
   }
 
-  document
-    .getElementById("calc-result-" + resultType)
-    .replaceChildren(...newElements);
+
+  // calculation of the difference between the years
+  // Difference from 2021 to 2022
+  let difEuro2122 = parseInt(differenceEuro(data.cost[2021][type], data.cost[2022][type]).toFixed(0));
+  let difPerc2122 = parseInt(differencePercent(difEuro2122, data.cost[2021][type]).toFixed(0));
+
+  // Difference from 2022 to 2023
+  let difEuro2223 = parseInt(differenceEuro(data.cost[2022][type], data.cost[2023][type]).toFixed(0));
+  let difPerc2223 = parseInt(differencePercent(difEuro2223, data.cost[2022][type]).toFixed(0));
+
+  // show values (difference) in table
+  let diffTd = document.getElementById("calc-result-" + resultType + "-diff-2122-euro");
+
+  diffTd.textContent = (difEuro2122 > 0 ? "+" : "") + difEuro2122+"€";
+  diffTd.classList.value = "";
+  diffTd.classList.add( (difEuro2122 > 0 ? "text-danger" : "text-success") );
+
+
+  diffTd = document.getElementById("calc-result-" + resultType + "-diff-2122-perc");
+
+  diffTd.textContent = (difPerc2122 > 0 ? "+" : "") + difPerc2122+"%";
+  diffTd.classList.value = "";
+  diffTd.classList.add( (difPerc2122 > 0 ? "text-danger" : "text-success") );
+
+
+  diffTd = document.getElementById("calc-result-" + resultType + "-diff-2223-euro");
+
+  diffTd.textContent = (difEuro2223 > 0 ? "+" : "") + difEuro2223+"€";
+  diffTd.classList.value = "";
+  diffTd.classList.add( (difEuro2223 > 0 ? "text-danger" : "text-success") );
+
+
+  diffTd = document.getElementById("calc-result-" + resultType + "-diff-2223-perc");
+
+  diffTd.textContent = (difPerc2223 > 0 ? "+" : "") + difPerc2223+"%";
+  diffTd.classList.value = "";
+  diffTd.classList.add( (difPerc2223 > 0 ? "text-danger" : "text-success") );
+
+  // show scenario
+  document.getElementById("scenario-" + resultType).textContent = data.cost2021[type];
+
+  // show table (remove display: none)
+  document.getElementById("table-" + resultType).style = "";
 }
+
+/* 
+* Slider
+*/
+
 
 function prepareSlider(e, type) {
   let value = e.target.valueAsNumber;
@@ -269,17 +259,30 @@ function calculate2023Slider(value, type, resultType) {
   calculation = parseInt(calculation.toFixed(0));
   data.cost[2023][type] = calculation;
 
+
+  // take element in table
+  let elementTable = document.getElementById('calc-result-' + resultType + '-2023');
+
+  // set value
+  elementTable.textContent = `${calculation}€`;
+
+
   // calculating the new difference
-  let difEuro2223 = differenceEuro(data.cost[2022][type], data.cost[2023][type]);
-  let difPerc2223 = differencePercent(difEuro2223, data.cost[2021][type]);
+  let difEuro2223 = parseInt(differenceEuro(data.cost[2022][type], data.cost[2023][type]).toFixed(0));
+  let difPerc2223 = parseInt(differencePercent(difEuro2223, data.cost[2022][type]).toFixed(0));
 
-  // TODO: Add difference into HTML
+  let diffTd = document.getElementById("calc-result-" + resultType + "-diff-2223-euro");
 
-  // take last child (should be the value of 2023)
-  let lastChild = document.getElementById('calc-result-'+resultType).lastChild;
+  diffTd.textContent = (difEuro2223 > 0 ? "+" : "") + difEuro2223+"€";
+  diffTd.classList.value = "";
+  diffTd.classList.add( (difEuro2223 > 0 ? "text-danger" : "text-success") );
 
-  // replace textContent with new calculation
-  lastChild.textContent = `${calculation}€`;
+  
+  diffTd = document.getElementById("calc-result-" + resultType + "-diff-2223-perc");
+
+  diffTd.textContent = (difPerc2223 > 0 ? "+" : "") + difPerc2223+"%";
+  diffTd.classList.value = "";
+  diffTd.classList.add( (difPerc2223 > 0 ? "text-danger" : "text-success") );
 }
 
 // trigger by slider()
