@@ -12,8 +12,8 @@
         <h2>Strom</h2>
 
         <div class="input-group mb-3">
-          <span class="input-group-text">Vorjahresverbrauch (in kw/h):</span>
-          <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kw/h)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-electricity" value="4500">
+          <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
+          <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-electricity" value="4500">
           <button id="calculateElectricity" class="btn btn-warning" type="button">Stromkosten berechnen</button>
         </div>
 
@@ -83,8 +83,8 @@
             <option value="heatPump">Wärmepumpe</option>
             <option value="woodPellets">Holzpellets</option>
           </select>
-          <span class="input-group-text">Vorjahresverbrauch (in kw/h):</span>
-          <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kw/h)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-heater" value="4500">
+          <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
+          <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-heater" value="4500">
           <button id="calculateHeater" class="btn btn-danger" type="button" disabled>Heizkosten berechnen</button>
         </div>
 
@@ -149,6 +149,40 @@
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div class="pt-4">
+        <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast haben wir hier ein paar Standartszenarien durchgerechnet:</p>
+        <h4>Einfamilienhaus mit 4 Personen</h4>
+        <p>Ein Einfamilienhaus hat im deutschen Schnitt einen Verbrauch von 4.000kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+          <ul>
+            <li>2021: 1120€</li>
+            <li>2022: 1232€</li>
+            <li>2023: 1663€</li>
+          </ul>
+        </p>
+
+        <h4>Wohnung mit 1 Person</h4>
+        <p>Eine Wohnung mit einer Person hat im deutschen Schnitt einen Verbrauch von 1.500kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+          <ul>
+            <li>2021: 420€</li>
+            <li>2022: 462€</li>
+            <li>2023: 624€</li>
+          </ul>
+        </p>
+
+        <h4>Wohnung mit 2 Personen</h4>
+        <p>Eine Wohnung mit zwei Personen hat im deutschen Schnitt einen Verbrauch von 2.100kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+          <ul>
+            <li>2021: 588€</li>
+            <li>2022: 647€</li>
+            <li>2023: 873€</li>
+          </ul>
+        </p>
+      </div>
+
+      <div class="pb-4">
+        Zur besseren Vergleichbarkeit nutzt der Rechner für alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energieträger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich, den Brennwert beim Versorger zu erfragen. Alternativ können sie mit Hilfe dieser Website <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">kWh Umrechner</a> anhand gängiger Durchschnittswerte den ungefähren Verbrauch zu ermitteln.
       </div>
 
       <div class="disclaimer pt-3">
