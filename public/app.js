@@ -94,6 +94,199 @@
   }
 
   // src/home.mjs
+  var template = `<div class="home" style="padding:1rem">
+<h2 class="text-center">Willkommen auf ERB!</h2>
+<hr>
+<div class="container mb-3">
+
+  <div class="pb-4">
+    Diese Webseite ist im Rahmen der Veranstaltung Projektmanagement an der Hochschule Flensburg von Daniel Br\xFCgge, Pascal Ahlf, Tim Schmidt und Tobias S. R\xF6nnau entwickelt worden.
+    Diese Webseite versucht die Folgen der Energiekrise abzumildern, indem wir durch Prognoserechnungen die H\xF6he von kommenden Energierechnungen ermitteln.
+  </div>
+
+  <div class="border rounded-2" style="padding: 5px 15px 5px 15px">
+    <h2>Strom</h2>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
+      <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-electricity" value="4500">
+      <button id="calculateElectricity" class="btn btn-warning" type="button">Stromkosten berechnen</button>
+    </div>
+
+    <!-- <button id="calculateElectricity" class="btn btn-warning">Stromkosten berechnen</button>
+    <label for="user-input-electricity">Vorjahresverbrauch (in kw/h):</label>
+    <input type="number" id="user-input-electricity" value="4500"> -->
+
+    <input style="display:none" type="range" class="form-range mt-2" min="-100" max="100" id="range-slider-electricity">
+    <p class="text-center" id="range-slider-electricity-value"></p>
+    <div class="table-responsive" style="display:none" id="table-electricity">
+      <p>Szenario: <span id="scenario-electricity"></span>\u20AC pro kWh in 2021</p>
+
+      <table class="table table-light table-borderless" style="text-align: center;">
+        <thead>
+          <tr class="border-bottom">
+            <th scope="col">2021</th>
+            <th scope="col" style="width: 30px"></th>
+            <th scope="col">Differenz</th>
+            <th scope="col" style="width: 30px"></th>
+            <th scope="col">2022</th>
+            <th scope="col" style="width: 30px"></th>
+            <th scope="col">Differenz</th>
+            <th scope="col" style="width: 30px"></th>
+            <th scope="col">2023</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2" style="vertical-align: middle"><div id="calc-result-electricity-2021"></div></td>
+            <td rowspan="2"><div class="arrow">\u21D2</div></td>
+            <td>
+              <span id="calc-result-electricity-diff-2122-euro"></span>
+            </td>
+            <td rowspan="2"><div class="arrow">\u21D2</div></td>
+            <td rowspan="2" style="vertical-align: middle"><div id="calc-result-electricity-2022"></div></td>
+            <td rowspan="2"><div class="arrow">\u21D2</div></td>
+            <td>
+              <span id="calc-result-electricity-diff-2223-euro"></span>
+            </td>
+            <td rowspan="2"><div class="arrow">\u21D2</div></td>
+            <td rowspan="2" style="vertical-align: middle"><div id="calc-result-electricity-2023"></div></td>
+          </tr>
+          <tr>
+            <td>
+              <span id="calc-result-electricity-diff-2122-perc"></span>
+            </td>
+            <td>
+              <span id="calc-result-electricity-diff-2223-perc"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <br />
+
+  <div class="border rounded-2" style="padding: 5px 15px 5px 15px">
+    <h2> Andere Energietr\xE4ger </h2>
+
+    <div class="input-group mb-3">
+      <select class="form-select" aria-label="Heizung Dropdown" id="heater-select" style="flex-basis: 320px; flex-grow: 0;">
+        <option value="" disabled selected hidden>W\xE4hle einen Energietr\xE4ger</option> 
+        <option value="gas">Gas</option>
+        <option value="oil">\xD6l</option>
+        <option value="districtHeating">Fernw\xE4rme</option>
+        <option value="heatPump">W\xE4rmepumpe</option>
+        <option value="woodPellets">Holzpellets</option>
+      </select>
+      <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
+      <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-heater" value="4500">
+      <button id="calculateHeater" class="btn btn-danger" type="button" disabled>Heizkosten berechnen</button>
+    </div>
+
+
+    <!-- <select class="form-select" style="width: 280px !important" aria-label="Heizung Dropdown" id="heater-select">
+      <option value="" disabled selected hidden>W\xE4hle einen Energietr\xE4ger</option> 
+      <option value="gas">Gas</option>
+      <option value="oil">\xD6l</option>
+      <option value="districtHeating">Fernw\xE4rme</option>
+      <option value="heatPump">W\xE4rmepumpe</option>
+      <option value="woodPellets">Holzpellets</option>
+    </select>
+    <br />
+    <button id="calculateHeater" class="btn btn-danger" disabled>Heizkosten berechnen</button>
+    <label for="user-input-heater">Vorjahresverbrauch (in kw/h):</label>
+    <input type="number" id="user-input-heater" value="4500"> -->
+
+    <input style="display:none" type="range" class="form-range mt-2" min="-100" max="100" id="range-slider-heater">
+    <p class="text-center" id="range-slider-heater-value"></p>
+    <h4 class="text-center w3-flat-pomegranate" style="display:none;" id="errorHandling">Bitte w\xE4hl eine Energiequelle aus.</h4>
+    <div class="table-responsive" style="display:none" id="table-heater">
+      <p>Szenario: <span id="scenario-heater"></span>\u20AC pro kWh in 2021</p>
+
+      <table class="table table-light table-borderless" style="text-align: center;">
+        <thead>
+          <tr class="border-bottom">
+            <th scope="col">2021</th>
+            <th scope="col" style="width: 30px"></th>
+            <th scope="col">Differenz</th>
+            <th scope="col" style="width: 30px"></th>
+            <th scope="col">2022</th>
+            <th scope="col" style="width: 30px"></th>
+            <th scope="col">Differenz</th>
+            <th scope="col" style="width: 30px"></th>
+            <th scope="col">2023</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2" style="vertical-align: middle"><div id="calc-result-heater-2021"></div></td>
+            <td rowspan="2"><div class="arrow">\u21D2</div></td>
+            <td>
+              <span id="calc-result-heater-diff-2122-euro"></span>
+            </td>
+            <td rowspan="2"><div class="arrow">\u21D2</div></td>
+            <td rowspan="2" style="vertical-align: middle"><div id="calc-result-heater-2022"></div></td>
+            <td rowspan="2"><div class="arrow">\u21D2</div></td>
+            <td>
+              <span id="calc-result-heater-diff-2223-euro"></span>
+            </td>
+            <td rowspan="2"><div class="arrow">\u21D2</div></td>
+            <td rowspan="2" style="vertical-align: middle"><div id="calc-result-heater-2023"></div></td>
+          </tr>
+          <tr>
+            <td>
+              <span id="calc-result-heater-diff-2122-perc"></span>
+            </td>
+            <td>
+              <span id="calc-result-heater-diff-2223-perc"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="pt-4">
+    <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast haben wir hier ein paar Standartszenarien durchgerechnet:</p>
+    <h4>Einfamilienhaus mit 4 Personen</h4>
+    <p>Ein Einfamilienhaus hat im deutschen Schnitt einen Verbrauch von 4.000kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+      <ul>
+        <li>2021: 1120\u20AC</li>
+        <li>2022: 1232\u20AC</li>
+        <li>2023: 1663\u20AC</li>
+      </ul>
+    </p>
+
+    <h4>Wohnung mit 1 Person</h4>
+    <p>Eine Wohnung mit einer Person hat im deutschen Schnitt einen Verbrauch von 1.500kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+      <ul>
+        <li>2021: 420\u20AC</li>
+        <li>2022: 462\u20AC</li>
+        <li>2023: 624\u20AC</li>
+      </ul>
+    </p>
+
+    <h4>Wohnung mit 2 Personen</h4>
+    <p>Eine Wohnung mit zwei Personen hat im deutschen Schnitt einen Verbrauch von 2.100kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+      <ul>
+        <li>2021: 588\u20AC</li>
+        <li>2022: 647\u20AC</li>
+        <li>2023: 873\u20AC</li>
+      </ul>
+    </p>
+  </div>
+
+  <div class="pb-4">
+    Zur besseren Vergleichbarkeit nutzt der Rechner f\xFCr alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energietr\xE4ger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich, den Brennwert beim Versorger zu erfragen. Alternativ k\xF6nnen sie mit Hilfe dieser Website <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">kWh Umrechner</a> anhand g\xE4ngiger Durchschnittswerte den ungef\xE4hren Verbrauch zu ermitteln.
+  </div>
+
+  <div class="disclaimer pt-3">
+    Die get\xE4tigten Berechnungen sind basierend auf den Daten mehrerer Quellen und nach bestem Wissen und Gewissen von den Projektteilnehmern get\xE4tigt, trotzdem handelt es sich hierbei um eine Prognose. Dementsprechend k\xF6nnen unsere Berechnungen mitunter stark von der tats\xE4chlichen Abrechnung abweichen.
+  </div>
+</div>
+</div>
+`;
   var data = {
     year: [2022, 2023],
     cost2021: {
@@ -276,9 +469,32 @@
       element.classList.add("text-bg-danger");
   }
 
+  // src/imprint.mjs
+  var template2 = `
+<div class='impressum'><h1>Impressum</h1><p>Angaben gem\xE4\xDF \xA7 5 TMG</p><p>Daniel Br\xFCgge <br> 
+    Schreiberstra\xDFe 26<br> 
+    24937 Flensburg <br> 
+    </p><p> <strong>Vertreten durch: </strong><br>
+    Daniel Br\xFCgge<br>
+    Pascal Ahlf<br>
+    Tobias R\xF6nnau<br>
+    Tim Schmidt<br>
+    </p><p><strong>Kontakt:</strong> <br>
+    Telefon: 0152-09879864<br>
+    E-Mail: <a href='mailto:privat@d-bruegge.de'>privat@d-bruegge.de</a></br></p><p><strong>Haftungsausschluss: </strong><br><br><strong>Haftung f\xFCr Inhalte</strong><br><br>
+    Die Inhalte unserer Seiten wurden mit gr\xF6\xDFter Sorgfalt erstellt. F\xFCr die Richtigkeit, Vollst\xE4ndigkeit und Aktualit\xE4t der Inhalte k\xF6nnen wir jedoch keine Gew\xE4hr \xFCbernehmen. Als Diensteanbieter sind wir gem\xE4\xDF \xA7 7 Abs.1 TMG f\xFCr eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach \xA7\xA7 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, \xFCbermittelte oder gespeicherte fremde Informationen zu \xFCberwachen oder nach Umst\xE4nden zu forschen, die auf eine rechtswidrige T\xE4tigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unber\xFChrt. Eine diesbez\xFCgliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung m\xF6glich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.<br><br><strong>Urheberrecht</strong><br><br>
+    Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielf\xE4ltigung, Bearbeitung, Verbreitung und jede Art der Verwertung au\xDFerhalb der Grenzen des Urheberrechtes bed\xFCrfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur f\xFCr den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br><strong>Datenschutz</strong><br><br>
+    Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten m\xF6glich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit m\xF6glich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdr\xFCckliche Zustimmung nicht an Dritte weitergegeben. <br>
+    Wir weisen darauf hin, dass die Daten\xFCbertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitsl\xFCcken aufweisen kann. Ein l\xFCckenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht m\xF6glich. <br>
+    Der Nutzung von im Rahmen der Impressumspflicht ver\xF6ffentlichten Kontaktdaten durch Dritte zur \xDCbersendung von nicht ausdr\xFCcklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdr\xFCcklich widersprochen. Die Betreiber der Seiten behalten sich ausdr\xFCcklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.<br>
+    </p><br> 
+    Website Impressum von <a href="https://www.impressum-generator.de">impressum-generator.de</a>
+     </div>
+`;
+
   // src/app.js
   var router = new Router();
-  router.registerRoute("/", { template: "home.html", callback: init, callbackParam: [router] });
-  router.registerRoute("/imprint", { template: "impressum.html", callback: null, callbackParam: [] });
+  router.registerRoute("/pm-energy-calc/", { template, callback: init, callbackParam: [router] });
+  router.registerRoute("/pm-energy-calc/imprint", { template: template2, callback: null, callbackParam: [] });
   router.loadContent(window.location.pathname);
 })();
