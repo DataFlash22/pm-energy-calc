@@ -1,95 +1,81 @@
 <div class="home" style="padding:1rem">
-    <h2 class="text-center">Willkommen auf ERB!</h2>
-    <hr>
-    <div class="container mb-3">
-
-      <div class="pb-4">
-        Diese Webseite ist im Rahmen der Veranstaltung Projektmanagement an der Hochschule Flensburg von Daniel Brügge, Pascal Ahlf, Tim Schmidt und Tobias S. Rönnau entwickelt worden.
-        Sie versucht die Folgen der Energiekrise abzumildern, indem wir durch Prognoserechnungen die Höhe von kommenden Energierechnungen ermitteln.
+  <h2 class="text-center">Willkommen auf ERB!</h2>
+  <hr>
+  <div class="container mb-3">
+  
+    <div class="pb-4">
+      Diese Webseite wurde im Rahmen der Veranstaltung Projektmanagement an der Hochschule Flensburg von Daniel Brügge, Pascal Ahlf, Tim Schmidt und Tobias S. Rönnau entwickelt.
+      Sie versucht die Folgen der Energiekrise abzumildern, indem wir durch Prognoserechnungen die Höhe von kommenden Energierechnungen ermitteln.
+    </div>
+  
+    <div class="border rounded-2" style="padding: 5px 15px 5px 15px">
+      <h2>Strom</h2>
+  
+      <div class="input-group mb-3">
+        <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
+        <textarea type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-electricity" value="4500">
+        <button id="calculateElectricity" class="btn btn-warning" type="button">Stromkosten berechnen</button>
       </div>
-
-      <div class="border rounded-2" style="padding: 5px 15px 5px 15px">
-        <h2>Strom</h2>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
-          <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-electricity" value="4500">
-          <button id="calculateElectricity" class="btn btn-warning" type="button">Stromkosten berechnen</button>
-        </div>
-
-        <!-- <button id="calculateElectricity" class="btn btn-warning">Stromkosten berechnen</button>
-        <label for="user-input-electricity">Vorjahresverbrauch (in kw/h):</label>
-        <input type="number" id="user-input-electricity" value="4500"> -->
-
-        <input style="display:none" type="range" class="form-range mt-2" min="-100" max="100" id="range-slider-electricity">
-        <p class="text-center" id="range-slider-electricity-value"></p>
-        <div class="table-responsive" style="display:none" id="table-electricity">
-          <p>Szenario: <span id="scenario-electricity"></span>€ pro kWh in 2021</p>
-
-          <table class="table table-light table-borderless" style="text-align: center;">
-            <thead>
-              <tr class="border-bottom">
-                <th scope="col">2021</th>
-                <th scope="col" style="width: 30px"></th>
-                <th scope="col">Differenz</th>
-                <th scope="col" style="width: 30px"></th>
-                <th scope="col">2022</th>
-                <th scope="col" style="width: 30px"></th>
-                <th scope="col">Differenz</th>
-                <th scope="col" style="width: 30px"></th>
-                <th scope="col">2023</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td rowspan="2" style="vertical-align: middle"><div id="calc-result-electricity-2021"></div></td>
-                <td rowspan="2"><div class="arrow">⇒</div></td>
-                <td>
-                  <span id="calc-result-electricity-diff-2122-euro"></span>
-                </td>
-                <td rowspan="2"><div class="arrow">⇒</div></td>
-                <td rowspan="2" style="vertical-align: middle"><div id="calc-result-electricity-2022"></div></td>
-                <td rowspan="2"><div class="arrow">⇒</div></td>
-                <td>
-                  <span id="calc-result-electricity-diff-2223-euro"></span>
-                </td>
-                <td rowspan="2"><div class="arrow">⇒</div></td>
-                <td rowspan="2" style="vertical-align: middle"><div id="calc-result-electricity-2023"></div></td>
-              </tr>
-              <tr>
-                <td>
-                  <span id="calc-result-electricity-diff-2122-perc"></span>
-                </td>
-                <td>
-                  <span id="calc-result-electricity-diff-2223-perc"></span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  
+      <!-- <button id="calculateElectricity" class="btn btn-warning">Stromkosten berechnen</button>
+      <label for="user-input-electricity">Vorjahresverbrauch (in kw/h):</label>
+      <input type="number" id="user-input-electricity" value="4500"> -->
+  
+      <input style="display:none" type="range" class="form-range mt-2" min="-100" max="100" id="range-slider-electricity">
+      <p class="text-center" id="range-slider-electricity-value"></p>
+      <div class="table-responsive" style="display:none" id="table-electricity">
+        <p>Szenario: <span id="scenario-electricity"></span>€ pro kWh in 2021</p>
+  
+        <table class="table table-light table-borderless" style="text-align: center;">
+          <thead>
+            <tr class="border-bottom">
+              <th scope="col">2021</th>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">Differenz</th>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">2022</th>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">Differenz</th>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">2023</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="2" style="vertical-align: middle"><div id="calc-result-electricity-2021"></div></td>
+              <td rowspan="2"><div class="arrow">⇒</div></td>
+              <td>
+                <span id="calc-result-electricity-diff-2122-euro"></span>
+              </td>
+              <td rowspan="2"><div class="arrow">⇒</div></td>
+              <td rowspan="2" style="vertical-align: middle"><div id="calc-result-electricity-2022"></div></td>
+              <td rowspan="2"><div class="arrow">⇒</div></td>
+              <td>
+                <span id="calc-result-electricity-diff-2223-euro"></span>
+              </td>
+              <td rowspan="2"><div class="arrow">⇒</div></td>
+              <td rowspan="2" style="vertical-align: middle"><div id="calc-result-electricity-2023"></div></td>
+            </tr>
+            <tr>
+              <td>
+                <span id="calc-result-electricity-diff-2122-perc"></span>
+              </td>
+              <td>
+                <span id="calc-result-electricity-diff-2223-perc"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      
-      <br />
-
-      <div class="border rounded-2" style="padding: 5px 15px 5px 15px">
-        <h2> Andere Energieträger </h2>
-
-        <div class="input-group mb-3">
-          <select class="form-select" aria-label="Heizung Dropdown" id="heater-select" style="flex-basis: 320px; flex-grow: 0;">
-            <option value="" disabled selected hidden>Wähle einen Energieträger</option> 
-            <option value="gas">Gas</option>
-            <option value="oil">Öl</option>
-            <option value="districtHeating">Fernwärme</option>
-            <option value="heatPump">Wärmepumpe</option>
-            <option value="woodPellets">Holzpellets</option>
-          </select>
-          <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
-          <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-heater" value="4500">
-          <button id="calculateHeater" class="btn btn-danger" type="button" disabled>Heizkosten berechnen</button>
-        </div>
-
-
-        <!-- <select class="form-select" style="width: 280px !important" aria-label="Heizung Dropdown" id="heater-select">
+    </div>
+    
+    <br />
+  
+    <div class="border rounded-2" style="padding: 5px 15px 5px 15px">
+      <h2> Andere Energieträger </h2>
+  
+      <div class="input-group mb-3">
+        <select class="form-select" aria-label="Heizung Dropdown" id="heater-select" style="flex-basis: 320px; flex-grow: 0;">
           <option value="" disabled selected hidden>Wähle einen Energieträger</option> 
           <option value="gas">Gas</option>
           <option value="oil">Öl</option>
@@ -97,96 +83,110 @@
           <option value="heatPump">Wärmepumpe</option>
           <option value="woodPellets">Holzpellets</option>
         </select>
-        <br />
-        <button id="calculateHeater" class="btn btn-danger" disabled>Heizkosten berechnen</button>
-        <label for="user-input-heater">Vorjahresverbrauch (in kw/h):</label>
-        <input type="number" id="user-input-heater" value="4500"> -->
-
-        <input style="display:none" type="range" class="form-range mt-2" min="-100" max="100" id="range-slider-heater">
-        <p class="text-center" id="range-slider-heater-value"></p>
-        <h4 class="text-center w3-flat-pomegranate" style="display:none;" id="errorHandling">Bitte wähl eine Energiequelle aus.</h4>
-        <div class="table-responsive" style="display:none" id="table-heater">
-          <p>Szenario: <span id="scenario-heater"></span>€ pro kWh in 2021</p>
-
-          <table class="table table-light table-borderless" style="text-align: center;">
-            <thead>
-              <tr class="border-bottom">
-                <th scope="col">2021</th>
-                <th scope="col" style="width: 30px"></th>
-                <th scope="col">Differenz</th>
-                <th scope="col" style="width: 30px"></th>
-                <th scope="col">2022</th>
-                <th scope="col" style="width: 30px"></th>
-                <th scope="col">Differenz</th>
-                <th scope="col" style="width: 30px"></th>
-                <th scope="col">2023</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td rowspan="2" style="vertical-align: middle"><div id="calc-result-heater-2021"></div></td>
-                <td rowspan="2"><div class="arrow">⇒</div></td>
-                <td>
-                  <span id="calc-result-heater-diff-2122-euro"></span>
-                </td>
-                <td rowspan="2"><div class="arrow">⇒</div></td>
-                <td rowspan="2" style="vertical-align: middle"><div id="calc-result-heater-2022"></div></td>
-                <td rowspan="2"><div class="arrow">⇒</div></td>
-                <td>
-                  <span id="calc-result-heater-diff-2223-euro"></span>
-                </td>
-                <td rowspan="2"><div class="arrow">⇒</div></td>
-                <td rowspan="2" style="vertical-align: middle"><div id="calc-result-heater-2023"></div></td>
-              </tr>
-              <tr>
-                <td>
-                  <span id="calc-result-heater-diff-2122-perc"></span>
-                </td>
-                <td>
-                  <span id="calc-result-heater-diff-2223-perc"></span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
+        <textarea type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-heater" value="4500">
+        <button id="calculateHeater" class="btn btn-danger" type="button" disabled>Heizkosten berechnen</button>
       </div>
-
-      <div class="pt-4">
-        <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast haben wir hier ein paar Standartszenarien durchgerechnet:</p>
-        <h4>Einfamilienhaus mit 4 Personen</h4>
-        <p>hat im deutschen Schnitt einen Verbrauch von 4.000kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
-          <ul>
-            <li>2021: 1120€</li>
-            <li>2022: 1232€</li>
-            <li>2023: 1663€</li>
-          </ul>
-        </p>
-
-        <h4>Wohnung mit 1 Person</h4>
-        <p>hat im deutschen Schnitt einen Verbrauch von 1.500kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
-          <ul>
-            <li>2021: 420€</li>
-            <li>2022: 462€</li>
-            <li>2023: 624€</li>
-          </ul>
-        </p>
-
-        <h4>Wohnung mit 2 Personen</h4>
-        <p>hat im deutschen Schnitt einen Verbrauch von 2.100kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
-          <ul>
-            <li>2021: 588€</li>
-            <li>2022: 647€</li>
-            <li>2023: 873€</li>
-          </ul>
-        </p>
+  
+  
+      <!-- <select class="form-select" style="width: 280px !important" aria-label="Heizung Dropdown" id="heater-select">
+        <option value="" disabled selected hidden>Wähle einen Energieträger</option> 
+        <option value="gas">Gas</option>
+        <option value="oil">Öl</option>
+        <option value="districtHeating">Fernwärme</option>
+        <option value="heatPump">Wärmepumpe</option>
+        <option value="woodPellets">Holzpellets</option>
+      </select>
+      <br />
+      <button id="calculateHeater" class="btn btn-danger" disabled>Heizkosten berechnen</button>
+      <label for="user-input-heater">Vorjahresverbrauch (in kw/h):</label>
+      <input type="number" id="user-input-heater" value="4500"> -->
+  
+      <input style="display:none" type="range" class="form-range mt-2" min="-100" max="100" id="range-slider-heater">
+      <p class="text-center" id="range-slider-heater-value"></p>
+      <h4 class="text-center w3-flat-pomegranate" style="display:none;" id="errorHandling">Bitte wähl eine Energiequelle aus.</h4>
+      <div class="table-responsive" style="display:none" id="table-heater">
+        <p>Szenario: <span id="scenario-heater"></span>€ pro kWh in 2021</p>
+  
+        <table class="table table-light table-borderless" style="text-align: center;">
+          <thead>
+            <tr class="border-bottom">
+              <th scope="col">2021</th>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">Differenz</th>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">2022</th>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">Differenz</th>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">2023</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="2" style="vertical-align: middle"><div id="calc-result-heater-2021"></div></td>
+              <td rowspan="2"><div class="arrow">⇒</div></td>
+              <td>
+                <span id="calc-result-heater-diff-2122-euro"></span>
+              </td>
+              <td rowspan="2"><div class="arrow">⇒</div></td>
+              <td rowspan="2" style="vertical-align: middle"><div id="calc-result-heater-2022"></div></td>
+              <td rowspan="2"><div class="arrow">⇒</div></td>
+              <td>
+                <span id="calc-result-heater-diff-2223-euro"></span>
+              </td>
+              <td rowspan="2"><div class="arrow">⇒</div></td>
+              <td rowspan="2" style="vertical-align: middle"><div id="calc-result-heater-2023"></div></td>
+            </tr>
+            <tr>
+              <td>
+                <span id="calc-result-heater-diff-2122-perc"></span>
+              </td>
+              <td>
+                <span id="calc-result-heater-diff-2223-perc"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <div class="pb-4">
-        Zur besseren Vergleichbarkeit nutzt der Rechner für alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energieträger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich den Brennwert beim Versorger zu erfragen. Alternativ können sie mit Hilfe  <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">dieser Website (kWh Umrechner)</a> anhand gängiger Durchschnittswerte den ungefähren Verbrauch zu ermitteln.
-      </div>
-
-      <div class="disclaimer pt-3">
-        Die Berechnungen basieren auf den Daten mehrerer Quellen und wurden nach bestem Wissen und Gewissen von den Projektteilnehmern zusammengetragen. Trotzdem handelt es sich hierbei um eine Prognose. Dementsprechend können unsere Berechnungen mitunter stark von der tatsächlichen Abrechnung abweichen.
-      </div>
+    </div>
+  
+    <div class="pt-4">
+      <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast, haben wir hier ein paar Standardszenarien für Sie durchgerechnet:</p>
+      <h4>Ein Einfamilienhaus mit 4 Personen</h4>
+      <p>hat im deutschen Schnitt einen Verbrauch von 4.000kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+        <ul>
+          <li>2021: 1120€</li>
+          <li>2022: 1232€</li>
+          <li>2023: 1663€</li>
+        </ul>
+      </p>
+  
+      <h4>Eine Wohnung mit 1 Person</h4>
+      <p>hat im deutschen Schnitt einen Verbrauch von 1.500kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+        <ul>
+          <li>2021: 420€</li>
+          <li>2022: 462€</li>
+          <li>2023: 624€</li>
+        </ul>
+      </p>
+  
+      <h4>Eine Wohnung mit 2 Personen</h4>
+      <p>hat im deutschen Schnitt einen Verbrauch von 2.100kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+        <ul>
+          <li>2021: 588€</li>
+          <li>2022: 647€</li>
+          <li>2023: 873€</li>
+        </ul>
+      </p>
+    </div>
+  
+    <div class="pb-4">
+      Zur besseren Vergleichbarkeit nutzt der Rechner für alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energieträger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich den Brennwert beim Versorger zu erfragen. Alternativ können sie mit Hilfe  <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">dieser Website (kWh Umrechner)</a> anhand gängiger Durchschnittswerte den ungefähren Verbrauch ermitteln.
+    </div>
+  
+    <div class="disclaimer pt-3">
+      Die Berechnungen basieren auf den Daten mehrerer Quellen und wurden nach bestem Wissen und Gewissen von den Projektteilnehmern zusammengetragen. Trotzdem handelt es sich hierbei um eine Prognose. Dementsprechend können unsere Berechnungen mitunter stark von der tatsächlichen Abrechnung abweichen.
+    </div>
   </div>
 </div>
