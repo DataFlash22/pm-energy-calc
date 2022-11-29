@@ -7,7 +7,7 @@ export let template = `<div class="home" style="padding:1rem">
 
   <div class="pb-4">
     Diese Webseite ist im Rahmen der Veranstaltung Projektmanagement an der Hochschule Flensburg von Daniel Brügge, Pascal Ahlf, Tim Schmidt und Tobias S. Rönnau entwickelt worden.
-    Diese Webseite versucht die Folgen der Energiekrise abzumildern, indem wir durch Prognoserechnungen die Höhe von kommenden Energierechnungen ermitteln.
+    Sie versucht die Folgen der Energiekrise abzumildern, indem wir durch Prognoserechnungen die Höhe von kommenden Energierechnungen ermitteln.
   </div>
 
   <div class="border rounded-2" style="padding: 5px 15px 5px 15px">
@@ -154,9 +154,9 @@ export let template = `<div class="home" style="padding:1rem">
   </div>
 
   <div class="pt-4">
-    <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast haben wir hier ein paar Standartszenarien durchgerechnet:</p>
+    <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast haben wir hier ein paar Standardszenarien durchgerechnet:</p>
     <h4>Einfamilienhaus mit 4 Personen</h4>
-    <p>Ein Einfamilienhaus hat im deutschen Schnitt einen Verbrauch von 4.000kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+    <p>hat im deutschen Schnitt einen Verbrauch von 4.000kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
       <ul>
         <li>2021: 1120€</li>
         <li>2022: 1232€</li>
@@ -165,7 +165,7 @@ export let template = `<div class="home" style="padding:1rem">
     </p>
 
     <h4>Wohnung mit 1 Person</h4>
-    <p>Eine Wohnung mit einer Person hat im deutschen Schnitt einen Verbrauch von 1.500kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+    <p>hat im deutschen Schnitt einen Verbrauch von 1.500kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
       <ul>
         <li>2021: 420€</li>
         <li>2022: 462€</li>
@@ -174,7 +174,7 @@ export let template = `<div class="home" style="padding:1rem">
     </p>
 
     <h4>Wohnung mit 2 Personen</h4>
-    <p>Eine Wohnung mit zwei Personen hat im deutschen Schnitt einen Verbrauch von 2.100kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+    <p>hat im deutschen Schnitt einen Verbrauch von 2.100kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
       <ul>
         <li>2021: 588€</li>
         <li>2022: 647€</li>
@@ -184,11 +184,11 @@ export let template = `<div class="home" style="padding:1rem">
   </div>
 
   <div class="pb-4">
-    Zur besseren Vergleichbarkeit nutzt der Rechner für alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energieträger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich, den Brennwert beim Versorger zu erfragen. Alternativ können sie mit Hilfe dieser Website <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">kWh Umrechner</a> anhand gängiger Durchschnittswerte den ungefähren Verbrauch zu ermitteln.
+    Zur besseren Vergleichbarkeit nutzt der Rechner für alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energieträger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich den Brennwert beim Versorger zu erfragen. Alternativ können sie mit Hilfe  <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">dieser Website (kWh Umrechner)</a> anhand gängiger Durchschnittswerte den ungefähren Verbrauch zu ermitteln.
   </div>
 
   <div class="disclaimer pt-3">
-    Die getätigten Berechnungen sind basierend auf den Daten mehrerer Quellen und nach bestem Wissen und Gewissen von den Projektteilnehmern getätigt, trotzdem handelt es sich hierbei um eine Prognose. Dementsprechend können unsere Berechnungen mitunter stark von der tatsächlichen Abrechnung abweichen.
+    Die Berechnungen basieren auf den Daten mehrerer Quellen und wurden nach bestem Wissen und Gewissen von den Projektteilnehmern zusammengetragen. Trotzdem handelt es sich hierbei um eine Prognose. Dementsprechend können unsere Berechnungen mitunter stark von der tatsächlichen Abrechnung abweichen.
   </div>
 </div>
 </div>
