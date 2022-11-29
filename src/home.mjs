@@ -6,7 +6,7 @@ export let template = `<div class="home" style="padding:1rem">
 <div class="container mb-3">
 
   <div class="pb-4">
-    Diese Webseite ist im Rahmen der Veranstaltung Projektmanagement an der Hochschule Flensburg von Daniel Brügge, Pascal Ahlf, Tim Schmidt und Tobias S. Rönnau entwickelt worden.
+    Diese Webseite wurde im Rahmen der Veranstaltung Projektmanagement an der Hochschule Flensburg von Daniel Brügge, Pascal Ahlf, Tim Schmidt und Tobias S. Rönnau entwickelt.
     Sie versucht die Folgen der Energiekrise abzumildern, indem wir durch Prognoserechnungen die Höhe von kommenden Energierechnungen ermitteln.
   </div>
 
@@ -15,7 +15,7 @@ export let template = `<div class="home" style="padding:1rem">
 
     <div class="input-group mb-3">
       <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
-      <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-electricity" value="4500">
+      <textarea type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-electricity" value="4500">
       <button id="calculateElectricity" class="btn btn-warning" type="button">Stromkosten berechnen</button>
     </div>
 
@@ -86,7 +86,7 @@ export let template = `<div class="home" style="padding:1rem">
         <option value="woodPellets">Holzpellets</option>
       </select>
       <span class="input-group-text">Vorjahresverbrauch (in kWh):</span>
-      <input type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-heater" value="4500">
+      <textarea type="number" class="form-control" placeholder="Vorjahresverbrauch (in kWh)..." aria-label="Recipient's username" aria-describedby="button-addon2" id="user-input-heater" value="4500">
       <button id="calculateHeater" class="btn btn-danger" type="button" disabled>Heizkosten berechnen</button>
     </div>
 
@@ -154,8 +154,8 @@ export let template = `<div class="home" style="padding:1rem">
   </div>
 
   <div class="pt-4">
-    <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast haben wir hier ein paar Standardszenarien durchgerechnet:</p>
-    <h4>Einfamilienhaus mit 4 Personen</h4>
+    <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast, haben wir hier ein paar Standardszenarien für Sie durchgerechnet:</p>
+    <h4>Ein Einfamilienhaus mit 4 Personen</h4>
     <p>hat im deutschen Schnitt einen Verbrauch von 4.000kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
       <ul>
         <li>2021: 1120€</li>
@@ -164,7 +164,7 @@ export let template = `<div class="home" style="padding:1rem">
       </ul>
     </p>
 
-    <h4>Wohnung mit 1 Person</h4>
+    <h4>Eine Wohnung mit 1 Person</h4>
     <p>hat im deutschen Schnitt einen Verbrauch von 1.500kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
       <ul>
         <li>2021: 420€</li>
@@ -173,7 +173,7 @@ export let template = `<div class="home" style="padding:1rem">
       </ul>
     </p>
 
-    <h4>Wohnung mit 2 Personen</h4>
+    <h4>Eine Wohnung mit 2 Personen</h4>
     <p>hat im deutschen Schnitt einen Verbrauch von 2.100kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
       <ul>
         <li>2021: 588€</li>
@@ -184,7 +184,7 @@ export let template = `<div class="home" style="padding:1rem">
   </div>
 
   <div class="pb-4">
-    Zur besseren Vergleichbarkeit nutzt der Rechner für alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energieträger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich den Brennwert beim Versorger zu erfragen. Alternativ können sie mit Hilfe  <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">dieser Website (kWh Umrechner)</a> anhand gängiger Durchschnittswerte den ungefähren Verbrauch zu ermitteln.
+    Zur besseren Vergleichbarkeit nutzt der Rechner für alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energieträger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich den Brennwert beim Versorger zu erfragen. Alternativ können sie mit Hilfe  <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">dieser Website (kWh Umrechner)</a> anhand gängiger Durchschnittswerte den ungefähren Verbrauch ermitteln.
   </div>
 
   <div class="disclaimer pt-3">
