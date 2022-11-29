@@ -101,7 +101,7 @@
 
   <div class="pb-4">
     Diese Webseite ist im Rahmen der Veranstaltung Projektmanagement an der Hochschule Flensburg von Daniel Br\xFCgge, Pascal Ahlf, Tim Schmidt und Tobias S. R\xF6nnau entwickelt worden.
-    Diese Webseite versucht die Folgen der Energiekrise abzumildern, indem wir durch Prognoserechnungen die H\xF6he von kommenden Energierechnungen ermitteln.
+    Sie versucht die Folgen der Energiekrise abzumildern, indem wir durch Prognoserechnungen die H\xF6he von kommenden Energierechnungen ermitteln.
   </div>
 
   <div class="border rounded-2" style="padding: 5px 15px 5px 15px">
@@ -248,9 +248,9 @@
   </div>
 
   <div class="pt-4">
-    <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast haben wir hier ein paar Standartszenarien durchgerechnet:</p>
+    <p>Falls du deinen Stromverbrauch gerade nicht vorliegen hast haben wir hier ein paar Standardszenarien durchgerechnet:</p>
     <h4>Einfamilienhaus mit 4 Personen</h4>
-    <p>Ein Einfamilienhaus hat im deutschen Schnitt einen Verbrauch von 4.000kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+    <p>hat im deutschen Schnitt einen Verbrauch von 4.000kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
       <ul>
         <li>2021: 1120\u20AC</li>
         <li>2022: 1232\u20AC</li>
@@ -259,7 +259,7 @@
     </p>
 
     <h4>Wohnung mit 1 Person</h4>
-    <p>Eine Wohnung mit einer Person hat im deutschen Schnitt einen Verbrauch von 1.500kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+    <p>hat im deutschen Schnitt einen Verbrauch von 1.500kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
       <ul>
         <li>2021: 420\u20AC</li>
         <li>2022: 462\u20AC</li>
@@ -268,7 +268,7 @@
     </p>
 
     <h4>Wohnung mit 2 Personen</h4>
-    <p>Eine Wohnung mit zwei Personen hat im deutschen Schnitt einen Verbrauch von 2.100kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
+    <p>hat im deutschen Schnitt einen Verbrauch von 2.100kWh. Daraus ergeben sich bei unseren Kakulationen folgende Werte:
       <ul>
         <li>2021: 588\u20AC</li>
         <li>2022: 647\u20AC</li>
@@ -278,11 +278,11 @@
   </div>
 
   <div class="pb-4">
-    Zur besseren Vergleichbarkeit nutzt der Rechner f\xFCr alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energietr\xE4ger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich, den Brennwert beim Versorger zu erfragen. Alternativ k\xF6nnen sie mit Hilfe dieser Website <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">kWh Umrechner</a> anhand g\xE4ngiger Durchschnittswerte den ungef\xE4hren Verbrauch zu ermitteln.
+    Zur besseren Vergleichbarkeit nutzt der Rechner f\xFCr alle Typen von Heizsystemen die Einheit kWh. Da diese jedoch nicht bei jedem Energietr\xE4ger die Handelseinheit ist, muss es vorher umgerechnet werden. Hierzu empfiehlt es sich den Brennwert beim Versorger zu erfragen. Alternativ k\xF6nnen sie mit Hilfe  <a href="https://www.energie-umwelt.ch/tools/835-einheiten-umrechner-fuer-verschiedene-heizenergie">dieser Website (kWh Umrechner)</a> anhand g\xE4ngiger Durchschnittswerte den ungef\xE4hren Verbrauch zu ermitteln.
   </div>
 
   <div class="disclaimer pt-3">
-    Die get\xE4tigten Berechnungen sind basierend auf den Daten mehrerer Quellen und nach bestem Wissen und Gewissen von den Projektteilnehmern get\xE4tigt, trotzdem handelt es sich hierbei um eine Prognose. Dementsprechend k\xF6nnen unsere Berechnungen mitunter stark von der tats\xE4chlichen Abrechnung abweichen.
+    Die Berechnungen basieren auf den Daten mehrerer Quellen und wurden nach bestem Wissen und Gewissen von den Projektteilnehmern zusammengetragen. Trotzdem handelt es sich hierbei um eine Prognose. Dementsprechend k\xF6nnen unsere Berechnungen mitunter stark von der tats\xE4chlichen Abrechnung abweichen.
   </div>
 </div>
 </div>
